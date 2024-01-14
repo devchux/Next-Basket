@@ -1,4 +1,4 @@
-import { defaultParagraphStyle } from "@/utils/constants";
+import { defaultH4Style, defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,13 +54,7 @@ const Post: FC<{ image: string }> = ({ image }) => {
             New
           </Typography>
         </Box>
-        <Typography
-          variant="h5"
-          color="#252B42"
-          fontSize="1.25rem"
-          lineHeight="1.875rem"
-          letterSpacing="0.0125rem"
-        >
+        <Typography color="#252B42" {...defaultH4Style}>
           Loudest à la Madison #1 (L&apos;integral)
         </Typography>
         <Typography

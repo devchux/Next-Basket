@@ -1,4 +1,4 @@
-import { defaultParagraphStyle } from "@/utils/constants";
+import { defaultH3Style, defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { FC } from "react";
@@ -21,12 +21,8 @@ const Offer: FC<OfferProps> = ({ image, title, description }) => {
         <Image src={image} alt="" fill />
       </Box>
       <Typography
-        variant="h5"
+        {...defaultH3Style}
         color="#252B42"
-        fontSize="1.5rem"
-        fontWeight={700}
-        lineHeight="2rem"
-        letterSpacing="0.00625rem"
       >
         {title}
       </Typography>

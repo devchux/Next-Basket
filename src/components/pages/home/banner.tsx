@@ -1,5 +1,5 @@
 import Button from "@/components/buttons/button";
-import { defaultParagraphStyle } from "@/utils/constants";
+import { defaultH3Style, defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
@@ -45,10 +45,7 @@ const Banner = () => {
       </Typography>
       <Typography
         color="#23856D"
-        fontSize="1.5rem"
-        fontWeight={700}
-        lineHeight="2rem"
-        letterSpacing="0.00625rem"
+        {...defaultH3Style}
       >
         $16.48
       </Typography>

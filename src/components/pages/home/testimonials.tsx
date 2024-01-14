@@ -1,6 +1,6 @@
 import Stars from "@/components/common/stars";
 import SectionLayout from "@/layouts/section";
-import { defaultParagraphStyle } from "@/utils/constants";
+import { defaultH3Style, defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -18,11 +18,7 @@ const Testimonials = () => {
     >
       <Box width="100%" maxWidth="30rem" textAlign="center">
         <Typography
-          variant="h5"
-          fontSize="1.5rem"
-          fontWeight="700"
-          lineHeight="2rem"
-          letterSpacing="0.00625rem"
+        {...defaultH3Style}
           color="#252B42"
           mb="1.75rem"
         >

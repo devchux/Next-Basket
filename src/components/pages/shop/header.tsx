@@ -2,14 +2,20 @@ import Button from "@/components/buttons/button";
 import ProductCarousel from "@/components/carousel/product";
 import Stars from "@/components/common/stars";
 import SectionLayout from "@/layouts/section";
-import { defaultParagraphStyle } from "@/utils/constants";
-import { Box, Typography } from "@mui/material";
+import {
+  defaultH3Style,
+  defaultH4Style,
+  defaultParagraphStyle,
+} from "@/utils/constants";
+import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const Header = () => {
+  const theme = useTheme();
   const colors = ["#23A6F0", "#2DC071", "#E77C40", "#252B42"];
+
   return (
     <SectionLayout component="header">
       <Box
@@ -53,23 +59,37 @@ const Header = () => {
           gap="7.44rem"
         >
           <Box>
-            <Typography
-              variant="h5"
-              color="#252B42"
-              fontSize="1.25rem"
-              lineHeight="1.875rem"
-              letterSpacing="0.0125rem"
-            >
+            <Typography {...defaultH4Style} color="#252B42">
               Floating Phone
             </Typography>
-            <Box>
+            <Box display="flex" gap="0.63rem" alignItems="center">
               <Stars rating={4} />
-              <Typography>10 Reviews</Typography>
+              <Typography
+                {...defaultParagraphStyle}
+                color="#737373"
+                fontWeight={700}
+              >
+                10 Reviews
+              </Typography>
             </Box>
-            <Typography>$1,139.33</Typography>
-            <Box>
-              <Typography>Availability :</Typography>
-              <Typography>In Stock</Typography>
+            <Typography {...defaultH3Style} color="#252B42" mt="1.25rem">
+              $1,139.33
+            </Typography>
+            <Box display="flex" gap="0.31rem" mt="0.31rem">
+              <Typography
+                {...defaultParagraphStyle}
+                color="#737373"
+                fontWeight={700}
+              >
+                Availability :
+              </Typography>
+              <Typography
+                {...defaultParagraphStyle}
+                color={theme.palette.primary.main}
+                fontWeight={700}
+              >
+                In Stock
+              </Typography>
             </Box>
           </Box>
           <Box borderTop="0.0625rem solid #bdbdbd">
@@ -85,7 +105,17 @@ const Header = () => {
               ))}
             </Box>
             <Box display="flex" gap="0.62rem">
-              <Button variant="contained">Select Options</Button>
+              <Button
+                variant="contained"
+                sx={{
+                  ...defaultParagraphStyle,
+                  fontWeight: 700,
+                  padding: "0.62rem 1.25rem",
+                  textTransform: "capitalize"
+                }}
+              >
+                Select Options
+              </Button>
               <Box
                 role="button"
                 width="2.5rem"
