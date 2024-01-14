@@ -1,4 +1,5 @@
 import Button from "@/components/buttons/button";
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
@@ -18,12 +19,7 @@ const Banner = () => {
         backgroundSize: "cover",
       }}
     >
-      <Typography
-        color="#23A6F0"
-        fontSize="0.875rem"
-        fontWeight={700}
-        letterSpacing="0.0125rem"
-      >
+      <Typography {...defaultParagraphStyle} color="#23A6F0" fontWeight={700}>
         Designing Better Experience
       </Typography>
       <Typography
@@ -39,10 +35,8 @@ const Banner = () => {
         Problems trying to resolve the conflict between
       </Typography>
       <Typography
+        {...defaultParagraphStyle}
         color="#737373"
-        fontSize="0.875rem"
-        letterSpacing="0.0125rem"
-        lineHeight="1.25rem"
         maxWidth="28rem"
         margin="0 auto"
       >

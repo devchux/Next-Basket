@@ -1,4 +1,6 @@
+import Stars from "@/components/common/stars";
 import SectionLayout from "@/layouts/section";
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -14,11 +16,7 @@ const Testimonials = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Box
-        width="100%"
-        maxWidth="30rem"
-        textAlign="center"
-      >
+      <Box width="100%" maxWidth="30rem" textAlign="center">
         <Typography
           variant="h5"
           fontSize="1.5rem"
@@ -51,42 +49,16 @@ const Testimonials = () => {
               objectFit="cover"
             />
           </Box>
-          <Box display="flex" gap="0.31rem">
-            {Array(5)
-              .fill(null)
-              .map((_, index) => (
-                <Box
-                  position="relative"
-                  key={index}
-                  width="1.38rem"
-                  height="1.38rem"
-                >
-                  <Image
-                    src={`/assets/svgs/star${
-                      index === 4 ? "-outlined" : ""
-                    }.svg`}
-                    alt=""
-                    fill
-                  />
-                </Box>
-              ))}
-          </Box>
-          <Typography
-            fontSize="0.875rem"
-            fontWeight="700"
-            lineHeight="1.5rem"
-            letterSpacing="0.0125rem"
-          >
+          <Stars rating={4} />
+          <Typography {...defaultParagraphStyle} fontWeight="700">
             Slate helps you see how many more days you need to work to reach
             your financial goal.
           </Typography>
           <Box>
             <Typography
               color={theme.palette.primary.main}
-              fontSize="0.875rem"
+              {...defaultParagraphStyle}
               fontWeight="700"
-              lineHeight="1.5rem"
-              letterSpacing="0.0125rem"
             >
               Regina Miles
             </Typography>

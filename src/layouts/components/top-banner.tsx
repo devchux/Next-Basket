@@ -1,12 +1,11 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { defaultParagraphStyle } from "@/utils/constants";
 
 const defaultTypographyStyle = {
-  fontSize: "0.875rem",
+  ...defaultParagraphStyle,
   fontWeight: "700",
-  lineHeight: "1.5",
-  letterSpacing: "0.0125rem",
 };
 
 const TopBanner = () => {

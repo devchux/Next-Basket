@@ -1,3 +1,4 @@
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,9 +64,7 @@ const Post: FC<{ image: string }> = ({ image }) => {
           Loudest à la Madison #1 (L&apos;integral)
         </Typography>
         <Typography
-          fontSize="0.875rem"
-          lineHeight="1.25rem"
-          letterSpacing="0.0125rem"
+          {...defaultParagraphStyle}
           color="#737373"
           maxWidth="17.5rem"
         >

@@ -1,3 +1,4 @@
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { FC } from "react";
@@ -33,11 +34,9 @@ const Product: FC<{
           {title}
         </Typography>
         <Typography
+          {...defaultParagraphStyle}
           color="#737373"
-          fontSize="0.875rem"
           fontWeight={700}
-          lineHeight="1.5rem"
-          letterSpacing="0.0125rem"
           whiteSpace="nowrap"
         >
           {category}

@@ -1,3 +1,4 @@
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, BoxProps, Typography, TypographyProps } from "@mui/material";
 import React, { FC } from "react";
 
@@ -48,9 +49,7 @@ const SectionTitle: FC<ISectionTitle> = ({
       </Typography>
       {description && (
         <Typography
-          fontSize="0.875rem"
-          lineHeight="1.25rem"
-          letterSpacing="0.0125rem"
+          {...defaultParagraphStyle}
           color="#737373"
           {...descriptionProps}
         >

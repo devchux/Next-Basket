@@ -1,11 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
+import { defaultParagraphStyle } from "@/utils/constants";
 
 const paragraphStyle = {
-  fontSize: "0.875rem",
+  ...defaultParagraphStyle,
   fontWeight: "700",
-  lineHeight: "1.5rem",
-  letterSpacing: "0.0125rem",
 };
 
 const headingStyle = {

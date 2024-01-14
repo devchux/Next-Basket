@@ -1,14 +1,11 @@
+import { defaultParagraphStyle } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { FC } from "react";
 
-export type OfferProps = { image: string; title: string; description: string }
+export type OfferProps = { image: string; title: string; description: string };
 
-const Offer: FC<OfferProps> = ({
-  image,
-  title,
-  description,
-}) => {
+const Offer: FC<OfferProps> = ({ image, title, description }) => {
   return (
     <Box
       width="100%"
@@ -33,12 +30,7 @@ const Offer: FC<OfferProps> = ({
       >
         {title}
       </Typography>
-      <Typography
-        color="#737373"
-        fontSize="0.875rem"
-        lineHeight="1.25rem"
-        letterSpacing="0.0125rem"
-      >
+      <Typography {...defaultParagraphStyle} color="#737373">
         {description}
       </Typography>
     </Box>

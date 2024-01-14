@@ -5,6 +5,7 @@ import Image from "next/image";
 import { footerLinks } from "../constants";
 import Link from "next/link";
 import EmailNotification from "@/components/inputs/email-notification";
+import { defaultParagraphStyle } from "@/utils/constants";
 
 const Footer = () => {
   const footerLinkRightSpacing = useCallback((index: number) => {
@@ -126,10 +127,8 @@ const Footer = () => {
           margin="auto"
         >
           <Typography
-            fontSize="0.875rem"
+            {...defaultParagraphStyle}
             fontWeight="700"
-            lineHeight="1.5rem"
-            letterSpacing="0.0125rem"
             color="#737373"
           >
             Made With Love By Finland All Right Reserved
