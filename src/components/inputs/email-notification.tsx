@@ -1,5 +1,6 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+import Button from "../buttons/button";
 
 const EmailNotification = () => {
   return (
@@ -29,9 +30,7 @@ const EmailNotification = () => {
         variant="contained"
         fullWidth
         sx={{
-          color: "#FFF",
           height: "100%",
-          boxShadow: "none",
           maxWidth: "7.3125rem",
           textTransform: "capitalize",
           borderRadius: "0"
