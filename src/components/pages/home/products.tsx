@@ -1,11 +1,12 @@
 import ProductList from "@/components/cards/product-list";
 import SectionTitle from "@/components/common/section-title";
+import SectionLayout from "@/layouts/section";
 import { Box, Button } from "@mui/material";
 import React from "react";
 
 const Products = () => {
   return (
-    <Box component="section" maxWidth="65rem" margin="auto" py="5rem">
+    <SectionLayout maxWidth="67.69rem" py="5rem">
       <SectionTitle
         section="Featured Products"
         title="BESTSELLER PRODUCTS"
@@ -28,7 +29,7 @@ const Products = () => {
           LOAD MORE PRODUCTS
         </Button>
       </Box>
-    </Box>
+    </SectionLayout>
   );
 };
 

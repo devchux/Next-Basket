@@ -1,16 +1,22 @@
-import { Box, BoxProps, Typography } from "@mui/material";
+import { Box, BoxProps, Typography, TypographyProps } from "@mui/material";
 import React, { FC } from "react";
 
 interface ISectionTitle extends BoxProps {
   section: string;
   title: string;
-  description: string;
+  description?: string;
+  sectionProps?: TypographyProps;
+  titleProps?: TypographyProps;
+  descriptionProps?: TypographyProps;
 }
 
 const SectionTitle: FC<ISectionTitle> = ({
   section,
   title,
   description,
+  titleProps,
+  descriptionProps,
+  sectionProps,
   ...rest
 }) => {
   return (
@@ -26,6 +32,7 @@ const SectionTitle: FC<ISectionTitle> = ({
         lineHeight="1.875rem"
         letterSpacing="0.0125rem"
         color="#737373"
+        {...sectionProps}
       >
         {section}
       </Typography>
@@ -35,17 +42,21 @@ const SectionTitle: FC<ISectionTitle> = ({
         letterSpacing="0.00625rem"
         fontWeight={700}
         color="#252B42"
+        {...titleProps}
       >
         {title}
       </Typography>
-      <Typography
-        fontSize="0.875rem"
-        lineHeight="1.25rem"
-        letterSpacing="0.0125rem"
-        color="#737373"
-      >
-        {description}
-      </Typography>
+      {description && (
+        <Typography
+          fontSize="0.875rem"
+          lineHeight="1.25rem"
+          letterSpacing="0.0125rem"
+          color="#737373"
+          {...descriptionProps}
+        >
+          {description}
+        </Typography>
+      )}
     </Box>
   );
 };

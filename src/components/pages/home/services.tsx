@@ -1,5 +1,6 @@
 import Offer, { OfferProps } from "@/components/common/offer";
 import SectionTitle from "@/components/common/section-title";
+import SectionLayout from "@/layouts/section";
 import { Box } from "@mui/material";
 import React, { useMemo } from "react";
 
@@ -25,12 +26,7 @@ const Services = () => {
     ];
   }, []);
   return (
-    <Box
-      component="section"
-      maxWidth="65.625rem"
-      margin="0 auto"
-      padding="5rem 0"
-    >
+    <SectionLayout padding="5rem 0">
       <SectionTitle
         section="Featured Products"
         title="BESTSELLER PRODUCTS"
@@ -42,7 +38,7 @@ const Services = () => {
           <Offer key={offerProps.title} {...offerProps} />
         ))}
       </Box>
-    </Box>
+    </SectionLayout>
   );
 };
 
