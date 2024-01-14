@@ -28,6 +28,8 @@ const Navbar = () => {
       display="flex"
       alignItems="center"
       gap="7.44rem"
+      maxWidth="90rem"
+      margin="0 auto"
     >
       <Logo />
       <Box display="flex" width="100%" justifyContent="space-between">
