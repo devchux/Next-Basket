@@ -25,7 +25,7 @@ const Footer = () => {
 
   return (
     <Box component="footer">
-      <Box height="8.875rem" bgcolor="#FAFAFA">
+      <Box height="8.875rem">
         <Box
           maxWidth="65.625rem"
           margin="auto"
