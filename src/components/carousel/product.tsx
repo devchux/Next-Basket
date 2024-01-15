@@ -15,6 +15,11 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
     setView((prev) => prev - 1);
   };
 
+  const selectImage = (image: string) => {
+    const index = images.findIndex((img) => img === image);
+    setView(index);
+  };
+
   return (
     <Box width="100%" maxWidth="31.625rem">
       <Box width="100%" position="relative" overflow="hidden">
@@ -35,7 +40,7 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
                 src="/assets/svgs/gt-1.svg"
                 alt=""
                 fill
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
               />
             </Box>
           </Box>
@@ -52,7 +57,7 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
         >
           {images.map((img, i) => (
             <Box height="100%" position="relative" key={i}>
-              <Image src={img} alt="" fill objectFit="cover" />
+              <Image src={img} alt="" fill style={{ objectFit: "cover" }} />
             </Box>
           ))}
         </Box>
@@ -80,7 +85,7 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
                 src="/assets/svgs/gt-1.svg"
                 alt=""
                 fill
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
               />
             </Box>
           </Box>
@@ -90,8 +95,15 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
         {images
           .filter((_, i) => i !== view)
           .map((img, i) => (
-            <Box key={i} position="relative" width="6.25rem" height="4.69rem">
-              <Image src={img} alt="" fill objectFit="cover" />
+            <Box
+              key={i}
+              position="relative"
+              width="6.25rem"
+              height="4.69rem"
+              sx={{ cursor: "pointer", opacity: 0.5 }}
+              onClick={() => selectImage(img)}
+            >
+              <Image src={img} alt="" fill style={{ objectFit: "cover" }} />
             </Box>
           ))}
       </Box>

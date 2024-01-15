@@ -17,11 +17,7 @@ const Testimonials = () => {
       justifyContent="space-between"
     >
       <Box width="100%" maxWidth="30rem" textAlign="center">
-        <Typography
-        {...defaultH3Style}
-          color="#252B42"
-          mb="1.75rem"
-        >
+        <Typography {...defaultH3Style} color="#252B42" mb="1.75rem">
           What they say about us
         </Typography>
         <Box
@@ -42,7 +38,7 @@ const Testimonials = () => {
               src={`/assets/images/user-1.jpg`}
               alt=""
               fill
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
             />
           </Box>
           <Stars rating={4} />
@@ -85,7 +81,7 @@ const Testimonials = () => {
                 src={`/assets/images/t-${index + 1}.png`}
                 alt=""
                 fill
-                objectFit="contain"
+                style={{ objectFit: "contain" }}
               />
             </Box>
           ))}

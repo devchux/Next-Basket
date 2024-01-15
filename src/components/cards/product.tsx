@@ -9,7 +9,8 @@ const Product: FC<{
   oldPrice: string;
   newPrice: string;
   image: string;
-}> = ({ title, category, oldPrice, newPrice, image }) => {
+  leftAlign?: boolean;
+}> = ({ title, category, oldPrice, newPrice, image, leftAlign }) => {
   return (
     <Box bgcolor="#fff">
       <Box position="relative" height="14.875rem">
@@ -21,7 +22,7 @@ const Product: FC<{
         display="flex"
         flexDirection="column"
         gap="0.62rem"
-        textAlign="center"
+        {...(!leftAlign ? { textAlign: "center" } : {})}
       >
         <Typography
           variant="h5"
@@ -41,7 +42,11 @@ const Product: FC<{
         >
           {category}
         </Typography>
-        <Box display="flex" gap="0.31rem" justifyContent="center">
+        <Box
+          display="flex"
+          gap="0.31rem"
+          {...(!leftAlign ? { justifyContent: "center" } : {})}
+        >
           <Typography
             variant="h5"
             fontSize="1rem"

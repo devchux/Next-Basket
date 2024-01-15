@@ -42,7 +42,7 @@ const Header = () => {
           Shop
         </Typography>
       </Box>
-      <Box display="flex" gap="1.88rem">
+      <Box display="flex" gap="1.88rem" mb="5rem">
         <ProductCarousel
           images={[
             "/assets/images/home-header-1.png",
