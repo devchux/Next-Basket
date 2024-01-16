@@ -32,12 +32,12 @@ const ProductList: FC<{
         lg: `repeat(${cols}, 1fr)`,
       }}
     >
-      {products?.all?.data?.products?.map((item, index) => (
+      {products?.all?.data?.products?.map((item) => (
         <Box
           component={Link}
           display="block"
-          key={index}
-          href={`/shop/${index + 1}`}
+          key={item.id}
+          href={`/shop/${item.id}`}
         >
           <Product
             leftAlign={leftAlign}

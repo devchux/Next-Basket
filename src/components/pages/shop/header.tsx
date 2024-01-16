@@ -2,6 +2,7 @@ import Button from "@/components/buttons/button";
 import ProductCarousel from "@/components/carousel/product";
 import Stars from "@/components/common/stars";
 import SectionLayout from "@/layouts/section";
+import { AppDispatch, RootState } from "@/store";
 import {
   defaultH3Style,
   defaultH4Style,
@@ -10,11 +11,28 @@ import {
 import { Box, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { IProductState } from "../../../../types";
+import { fetchSingleProduct } from "@/store/async/products";
+import { addProductToCart, addProductToWhitelist } from "@/store/slices/products";
 
-const Header = () => {
+const Header = ({ id }: { id: string }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const products = useSelector<RootState>(
+    (state) => state.products
+  ) as IProductState;
+  const data = products.single.data;
   const theme = useTheme();
   const colors = ["#23A6F0", "#2DC071", "#E77C40", "#252B42"];
+
+  useEffect(() => {
+    dispatch(fetchSingleProduct(id));
+  }, [dispatch, id]);
+
+  const addCart = () => data && dispatch(addProductToCart({ product: data }));
+
+  const addWhitelist = () => data && dispatch(addProductToWhitelist(data));
 
   return (
     <SectionLayout component="header">
@@ -42,126 +60,130 @@ const Header = () => {
           Shop
         </Typography>
       </Box>
-      <Box display="flex" gap="1.88rem" mb="5rem">
-        <ProductCarousel
-          images={[
-            "/assets/images/home-header-1.png",
-            "/assets/images/home-header-2.png",
-            "/assets/images/home-header-3.png",
-          ]}
-        />
-        <Box
-          width="100%"
-          padding="1.5rem"
-          pt="0.69rem"
-          display="flex"
-          flexDirection="column"
-          gap="7.44rem"
-        >
-          <Box>
-            <Typography {...defaultH4Style} color="#252B42">
-              Floating Phone
-            </Typography>
-            <Box display="flex" gap="0.63rem" alignItems="center">
-              <Stars rating={4} />
-              <Typography
-                {...defaultParagraphStyle}
-                color="#737373"
-                fontWeight={700}
-              >
-                10 Reviews
+      {data && (
+        <Box display="flex" gap="1.88rem" mb="5rem">
+          <ProductCarousel images={data?.images || []} />
+          <Box
+            width="100%"
+            padding="1.5rem"
+            pt="0.69rem"
+            display="flex"
+            flexDirection="column"
+            gap="7.44rem"
+          >
+            <Box>
+              <Typography {...defaultH4Style} color="#252B42">
+                {data?.title}
               </Typography>
+              <Box display="flex" gap="0.63rem" alignItems="center">
+                <Stars rating={Math.floor(data?.rating ?? 0)} />
+                <Typography
+                  {...defaultParagraphStyle}
+                  color="#737373"
+                  fontWeight={700}
+                >
+                  10 Reviews
+                </Typography>
+              </Box>
+              <Typography {...defaultH3Style} color="#252B42" mt="1.25rem">
+                $
+                {Number(
+                  data.price - (data.price * data.discountPercentage) / 100
+                ).toFixed(2)}
+              </Typography>
+              <Box display="flex" gap="0.31rem" mt="0.31rem">
+                <Typography
+                  {...defaultParagraphStyle}
+                  color="#737373"
+                  fontWeight={700}
+                >
+                  Availability :
+                </Typography>
+                <Typography
+                  {...defaultParagraphStyle}
+                  color={theme.palette.primary.main}
+                  fontWeight={700}
+                >
+                  {data.stock > 0 ? "In" : "Out of"} Stock
+                </Typography>
+              </Box>
             </Box>
-            <Typography {...defaultH3Style} color="#252B42" mt="1.25rem">
-              $1,139.33
-            </Typography>
-            <Box display="flex" gap="0.31rem" mt="0.31rem">
-              <Typography
-                {...defaultParagraphStyle}
-                color="#737373"
-                fontWeight={700}
-              >
-                Availability :
-              </Typography>
-              <Typography
-                {...defaultParagraphStyle}
-                color={theme.palette.primary.main}
-                fontWeight={700}
-              >
-                In Stock
-              </Typography>
-            </Box>
-          </Box>
-          <Box borderTop="0.0625rem solid #bdbdbd">
-            <Box display="flex" gap="0.62rem" mt="1.81rem" mb="4.19rem">
-              {colors.map((color) => (
+            <Box borderTop="0.0625rem solid #bdbdbd">
+              <Box display="flex" gap="0.62rem" mt="1.81rem" mb="4.19rem">
+                {colors.map((color) => (
+                  <Box
+                    key={color}
+                    bgcolor={color}
+                    width="1.875rem"
+                    height="1.875rem"
+                    borderRadius="50%"
+                  />
+                ))}
+              </Box>
+              <Box display="flex" gap="0.62rem">
+                <Button
+                  variant="contained"
+                  sx={{
+                    ...defaultParagraphStyle,
+                    fontWeight: 700,
+                    padding: "0.62rem 1.25rem",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  Select Options
+                </Button>
                 <Box
-                  key={color}
-                  bgcolor={color}
-                  width="1.875rem"
-                  height="1.875rem"
+                  role="button"
+                  width="2.5rem"
+                  height="2.5rem"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
                   borderRadius="50%"
-                />
-              ))}
-            </Box>
-            <Box display="flex" gap="0.62rem">
-              <Button
-                variant="contained"
-                sx={{
-                  ...defaultParagraphStyle,
-                  fontWeight: 700,
-                  padding: "0.62rem 1.25rem",
-                  textTransform: "capitalize"
-                }}
-              >
-                Select Options
-              </Button>
-              <Box
-                role="button"
-                width="2.5rem"
-                height="2.5rem"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                borderRadius="50%"
-                border="1px solid #E8E8E8"
-              >
-                <Box position="relative" width="1.25rem" height="1.25rem">
-                  <Image src="/assets/svgs/love-black.svg" alt="" fill />
+                  border="1px solid #E8E8E8"
+                  sx={{ cursor: "pointer" }}
+                  onClick={addWhitelist}
+                >
+                  <Box position="relative" width="1.25rem" height="1.25rem">
+                    <Image src="/assets/svgs/love-black.svg" alt="" fill />
+                  </Box>
                 </Box>
-              </Box>
-              <Box
-                role="button"
-                width="2.5rem"
-                height="2.5rem"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                borderRadius="50%"
-                border="1px solid #E8E8E8"
-              >
-                <Box position="relative" width="1.25rem" height="1.25rem">
-                  <Image src="/assets/svgs/cart-black.svg" alt="" fill />
+                <Box
+                  role="button"
+                  width="2.5rem"
+                  height="2.5rem"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderRadius="50%"
+                  border="1px solid #E8E8E8"
+                  sx={{ cursor: "pointer" }}
+                  onClick={addCart}
+                >
+                  <Box position="relative" width="1.25rem" height="1.25rem">
+                    <Image src="/assets/svgs/cart-black.svg" alt="" fill />
+                  </Box>
                 </Box>
-              </Box>
-              <Box
-                role="button"
-                width="2.5rem"
-                height="2.5rem"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                borderRadius="50%"
-                border="1px solid #E8E8E8"
-              >
-                <Box position="relative" width="1.25rem" height="1.25rem">
-                  <Image src="/assets/svgs/eye.svg" alt="" fill />
+                <Box
+                  role="button"
+                  width="2.5rem"
+                  height="2.5rem"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  borderRadius="50%"
+                  border="1px solid #E8E8E8"
+                  sx={{ cursor: "pointer" }}
+                >
+                  <Box position="relative" width="1.25rem" height="1.25rem">
+                    <Image src="/assets/svgs/eye.svg" alt="" fill />
+                  </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
+      )}
     </SectionLayout>
   );
 };

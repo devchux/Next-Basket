@@ -12,7 +12,7 @@ const Products = () => {
           BESTSELLER PRODUCTS
         </Typography>
       </Box>
-      <ProductList leftAlign cols={4} />
+      <ProductList leftAlign cols={4} limit={8} />
     </SectionLayout>
   );
 };

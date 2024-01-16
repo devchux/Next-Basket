@@ -3,6 +3,9 @@ import React from "react";
 import Logo from "./logo";
 import Link from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
+import { IProductState } from "../../../types";
 
 const getNavLinkStyle = (isActive?: boolean) => {
   const navLinkStyle = {
@@ -21,6 +24,10 @@ const getNavLinkStyle = (isActive?: boolean) => {
 };
 
 const Navbar = () => {
+  const products = useSelector<RootState>(
+    (state) => state.products
+  ) as IProductState;
+
   return (
     <Box
       component="nav"
@@ -111,7 +118,7 @@ const Navbar = () => {
               >
                 <Image alt="" src="/assets/svgs/cart.svg" fill />
               </Typography>
-              1
+              {products.cart.length > 0 && products.cart.length}
             </Box>
             <Box
               {...getNavLinkStyle()}
@@ -131,7 +138,7 @@ const Navbar = () => {
               >
                 <Image alt="" src="/assets/svgs/love.svg" fill />
               </Typography>
-              1
+              {products.whiteList.length > 0 && products.whiteList.length}
             </Box>
           </Box>
         </Box>
