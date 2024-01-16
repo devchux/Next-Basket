@@ -25,6 +25,7 @@ export interface IProductState {
     data: IAllProducts | null;
     isError: boolean;
     errorMessage: string;
+    limit: number;
   };
   single: {
     isLoading: boolean;

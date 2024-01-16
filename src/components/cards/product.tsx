@@ -6,15 +6,15 @@ import React, { FC } from "react";
 const Product: FC<{
   title: string;
   category: string;
-  oldPrice: string;
-  newPrice: string;
+  oldPrice: number;
+  newPrice: number | string;
   image: string;
   leftAlign?: boolean;
 }> = ({ title, category, oldPrice, newPrice, image, leftAlign }) => {
   return (
     <Box bgcolor="#fff">
       <Box position="relative" height="14.875rem">
-        <Image src={image} alt="" fill />
+        <Image src={image} alt="" style={{ objectFit: "cover" }} fill />
       </Box>
       <Box
         padding="1.56rem"
@@ -55,7 +55,7 @@ const Product: FC<{
             letterSpacing="0.00625rem"
             color="#bdbdbd"
           >
-            {oldPrice}
+            ${oldPrice}
           </Typography>
           <Typography
             variant="h5"
@@ -65,7 +65,7 @@ const Product: FC<{
             letterSpacing="0.00625rem"
             color="#23856D"
           >
-            {newPrice}
+            ${newPrice}
           </Typography>
         </Box>
       </Box>

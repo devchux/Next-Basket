@@ -9,6 +9,7 @@ const initialState: IProductState = {
     data: null,
     isError: false,
     errorMessage: "",
+    limit: 10,
   },
   single: {
     isLoading: false,
@@ -79,6 +80,9 @@ const productsSlice = createSlice({
       );
       state.whiteList = filterWhitelist;
     },
+    updateLimit(state, action: PayloadAction<number>) {
+      state.all.limit = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProducts.pending, (state) => {
@@ -87,10 +91,12 @@ const productsSlice = createSlice({
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
       state.all.isLoading = false;
       state.all.data = action.payload;
+      state.all.limit = action.payload.limit;
     });
     builder.addCase(fetchAllProducts.rejected, (state) => {
       state.all.isError = true;
       state.all.errorMessage = "Could not fetch all products";
+      state.all.limit = state.all.data?.limit || 10;
     });
     builder.addCase(fetchSingleProduct.pending, (state) => {
       state.single.isLoading = true;
@@ -111,6 +117,7 @@ export const {
   addProductToCart,
   addProductToWhitelist,
   removeProductFromWhitelist,
+  updateLimit,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

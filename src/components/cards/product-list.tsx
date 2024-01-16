@@ -1,9 +1,26 @@
 import { Box } from "@mui/material";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Product from "./product";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { IProductState } from "../../../types";
+import { fetchAllProducts } from "@/store/async/products";
 
-const ProductList: FC<{ cols?: number, leftAlign?: boolean }> = ({ cols = 5, leftAlign }) => {
+const ProductList: FC<{
+  cols?: number;
+  leftAlign?: boolean;
+  limit?: number;
+}> = ({ cols = 5, leftAlign, limit = 10 }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const products = useSelector<RootState>(
+    (state) => state.products
+  ) as IProductState;
+
+  useEffect(() => {
+    dispatch(fetchAllProducts({ limit }));
+  }, [dispatch, limit]);
+
   return (
     <Box
       display="grid"
@@ -15,24 +32,25 @@ const ProductList: FC<{ cols?: number, leftAlign?: boolean }> = ({ cols = 5, lef
         lg: `repeat(${cols}, 1fr)`,
       }}
     >
-      {Array(10)
-        .fill({
-          image: "/assets/images/home-header-1.png",
-          title: "Graphic Design",
-          category: "English Department",
-          oldPrice: "$16.48",
-          newPrice: "$6.48",
-        })
-        .map((item, index) => (
-          <Box
-            component={Link}
-            display="block"
-            key={index}
-            href={`/shop/${index + 1}`}
-          >
-            <Product leftAlign={leftAlign} {...item} />
-          </Box>
-        ))}
+      {products?.all?.data?.products?.map((item, index) => (
+        <Box
+          component={Link}
+          display="block"
+          key={index}
+          href={`/shop/${index + 1}`}
+        >
+          <Product
+            leftAlign={leftAlign}
+            title={item.title}
+            category={item.category}
+            oldPrice={item.price}
+            newPrice={Number(
+              item.price - (item.price * item.discountPercentage) / 100
+            ).toFixed(2)}
+            image={item.thumbnail}
+          />
+        </Box>
+      ))}
     </Box>
   );
 };
