@@ -1,5 +1,4 @@
 import Layout from "@/layouts";
-import "@/styles/globals.css";
 import { ThemeProvider } from "@emotion/react";
 import type { AppProps } from "next/app";
 import { theme } from "../../theme";
@@ -7,6 +6,9 @@ import { GlobalStyles } from "@mui/material";
 import { Provider } from "react-redux";
 import { persistor, store } from "@/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { ToastContainer } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -28,6 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <ToastContainer />
         </ThemeProvider>
       </PersistGate>
     </Provider>

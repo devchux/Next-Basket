@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { fetchAllProducts, fetchSingleProduct } from "../async/products";
 import { IProduct, IProductState } from "../../../types";
+import { toast } from "react-toastify";
 
 const initialState: IProductState = {
   all: {
@@ -9,7 +10,6 @@ const initialState: IProductState = {
     data: null,
     isError: false,
     errorMessage: "",
-    limit: 10,
   },
   single: {
     isLoading: false,
@@ -18,7 +18,7 @@ const initialState: IProductState = {
     errorMessage: "",
   },
   cart: [],
-  whiteList: [],
+  wishlist: [],
 };
 
 const productsSlice = createSlice({
@@ -27,7 +27,10 @@ const productsSlice = createSlice({
   reducers: {
     addProductToCart(
       state,
-      action: PayloadAction<{ product: IProduct; quantity?: number }>
+      action: PayloadAction<{
+        product: IProduct;
+        quantity?: number;
+      }>
     ) {
       const quantity = action.payload?.quantity ?? 1;
       const findItem = state.cart.find(
@@ -45,6 +48,7 @@ const productsSlice = createSlice({
           ...state.cart,
           { product: action.payload.product, quantity },
         ];
+        toast('Cart has been updated')
       }
     },
     removeProductFromCart(
@@ -71,17 +75,15 @@ const productsSlice = createSlice({
         state.cart = updatedCart;
       }
     },
-    addProductToWhitelist(state, action: PayloadAction<IProduct>) {
-      state.whiteList = [...state.whiteList, action.payload];
+    addProductToWishlist(state, action: PayloadAction<IProduct>) {
+      state.wishlist = [...state.wishlist, action.payload];
+      toast('wishlist has been updated')
     },
-    removeProductFromWhitelist(state, action: PayloadAction<IProduct>) {
-      const filterWhitelist = state.whiteList.filter(
+    removeProductFromWishlist(state, action: PayloadAction<IProduct>) {
+      const filterwishlist = state.wishlist.filter(
         (item) => item.id !== action.payload.id
       );
-      state.whiteList = filterWhitelist;
-    },
-    updateLimit(state, action: PayloadAction<number>) {
-      state.all.limit = action.payload;
+      state.wishlist = filterwishlist;
     },
   },
   extraReducers: (builder) => {
@@ -91,12 +93,11 @@ const productsSlice = createSlice({
     builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
       state.all.isLoading = false;
       state.all.data = action.payload;
-      state.all.limit = action.payload.limit;
     });
     builder.addCase(fetchAllProducts.rejected, (state) => {
       state.all.isError = true;
       state.all.errorMessage = "Could not fetch all products";
-      state.all.limit = state.all.data?.limit || 10;
+      toast.error(state.all.errorMessage);
     });
     builder.addCase(fetchSingleProduct.pending, (state) => {
       state.single.isLoading = true;
@@ -108,6 +109,7 @@ const productsSlice = createSlice({
     builder.addCase(fetchSingleProduct.rejected, (state) => {
       state.single.isError = true;
       state.single.errorMessage = "Could not fetch this product";
+      toast.error(state.single.errorMessage);
     });
   },
 });
@@ -115,9 +117,8 @@ const productsSlice = createSlice({
 export const {
   removeProductFromCart,
   addProductToCart,
-  addProductToWhitelist,
-  removeProductFromWhitelist,
-  updateLimit,
+  addProductToWishlist,
+  removeProductFromWishlist,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

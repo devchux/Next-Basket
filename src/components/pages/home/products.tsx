@@ -1,23 +1,22 @@
 import ProductList from "@/components/cards/product-list";
 import SectionTitle from "@/components/common/section-title";
 import SectionLayout from "@/layouts/section";
-import { AppDispatch, RootState } from "@/store";
+import { RootState } from "@/store";
 import { Box, Button } from "@mui/material";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { IProductState } from "../../../../types";
-import { updateLimit } from "@/store/slices/products";
 
 const Products = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const [productCount, setProductCount] = useState(10)
   const products = useSelector<RootState>(
     (state) => state.products
   ) as IProductState;
-  const limit = products.all.limit;
+  const limit = products.all.data?.limit || 10;
 
-  const setProductCount = () => {
+  const loadMore = () => {
     const newLimit = Number(limit) + 5;
-    dispatch(updateLimit(newLimit));
+    setProductCount(newLimit)
   };
 
   return (
@@ -28,7 +27,7 @@ const Products = () => {
         description="Problems trying to resolve the conflict between"
         mb="3.5rem"
       />
-      <ProductList limit={products.all.limit} />
+      <ProductList limit={productCount} />
       <Box display="flex" justifyContent="center" mt="3.5rem">
         <Button
           variant="outlined"
@@ -41,7 +40,7 @@ const Products = () => {
             lineHeight: "1.375rem",
             letterSpacing: "0.0125rem",
           }}
-          onClick={setProductCount}
+          onClick={loadMore}
         >
           {products.all.isLoading ? "Fetching..." : "LOAD MORE PRODUCTS"}
         </Button>

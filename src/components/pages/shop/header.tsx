@@ -15,7 +15,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IProductState } from "../../../../types";
 import { fetchSingleProduct } from "@/store/async/products";
-import { addProductToCart, addProductToWhitelist } from "@/store/slices/products";
+import {
+  addProductToCart,
+  addProductToWishlist,
+} from "@/store/slices/products";
+import { toast } from "react-toastify";
 
 const Header = ({ id }: { id: string }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,9 +34,18 @@ const Header = ({ id }: { id: string }) => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch, id]);
 
-  const addCart = () => data && dispatch(addProductToCart({ product: data }));
+  const addCart = () =>
+    data &&
+    dispatch(
+      addProductToCart({ product: data })
+    );
 
-  const addWhitelist = () => data && dispatch(addProductToWhitelist(data));
+  const addwishlist = () => data && dispatch(addProductToWishlist(data));
+
+  const getImages = () => {
+    if (data) return [data.thumbnail, ...data.images];
+    return [];
+  };
 
   return (
     <SectionLayout component="header">
@@ -62,7 +75,7 @@ const Header = ({ id }: { id: string }) => {
       </Box>
       {data && (
         <Box display="flex" gap="1.88rem" mb="5rem">
-          <ProductCarousel images={data?.images || []} />
+          <ProductCarousel images={getImages()} />
           <Box
             width="100%"
             padding="1.5rem"
@@ -82,7 +95,7 @@ const Header = ({ id }: { id: string }) => {
                   color="#737373"
                   fontWeight={700}
                 >
-                  10 Reviews
+                  {data?.rating ?? 0} Reviews
                 </Typography>
               </Box>
               <Typography {...defaultH3Style} color="#252B42" mt="1.25rem">
@@ -142,7 +155,7 @@ const Header = ({ id }: { id: string }) => {
                   borderRadius="50%"
                   border="1px solid #E8E8E8"
                   sx={{ cursor: "pointer" }}
-                  onClick={addWhitelist}
+                  onClick={addwishlist}
                 >
                   <Box position="relative" width="1.25rem" height="1.25rem">
                     <Image src="/assets/svgs/love-black.svg" alt="" fill />

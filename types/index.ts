@@ -25,7 +25,6 @@ export interface IProductState {
     data: IAllProducts | null;
     isError: boolean;
     errorMessage: string;
-    limit: number;
   };
   single: {
     isLoading: boolean;
@@ -34,5 +33,12 @@ export interface IProductState {
     errorMessage: string;
   };
   cart: { product: IProduct; quantity: number }[];
-  whiteList: IProduct[];
+  wishlist: IProduct[];
+}
+
+export type ModalType = "cart" | "wishlist";
+
+export interface IModalState {
+  open: boolean;
+  type: ModalType;
 }
