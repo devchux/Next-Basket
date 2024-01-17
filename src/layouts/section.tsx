@@ -3,7 +3,14 @@ import React, { FC } from "react";
 
 const SectionLayout: FC<BoxProps> = (props) => {
   return (
-    <Box component="section" maxWidth="65.625rem" margin="0 auto" {...props} />
+    <Box px="2.06rem">
+      <Box
+        component="section"
+        maxWidth="65.625rem"
+        margin="0 auto"
+        {...props}
+      />
+    </Box>
   );
 };
 

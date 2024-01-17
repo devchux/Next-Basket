@@ -34,11 +34,7 @@ const Header = ({ id }: { id: string }) => {
     dispatch(fetchSingleProduct(id));
   }, [dispatch, id]);
 
-  const addCart = () =>
-    data &&
-    dispatch(
-      addProductToCart({ product: data })
-    );
+  const addCart = () => data && dispatch(addProductToCart({ product: data }));
 
   const addwishlist = () => data && dispatch(addProductToWishlist(data));
 
@@ -54,6 +50,12 @@ const Header = ({ id }: { id: string }) => {
         display="flex"
         alignItems="center"
         gap="0.94rem"
+        sx={{
+          justifyContent: {
+            xs: "center",
+            md: "flex-start",
+          },
+        }}
       >
         <Typography
           component={Link}
@@ -74,7 +76,20 @@ const Header = ({ id }: { id: string }) => {
         </Typography>
       </Box>
       {data && (
-        <Box display="flex" gap="1.88rem" mb="5rem">
+        <Box
+          display="flex"
+          gap="1.88rem"
+          sx={{
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+            mb: {
+              xs: "3rem",
+              md: "5rem",
+            },
+          }}
+        >
           <ProductCarousel images={getImages()} />
           <Box
             width="100%"
@@ -82,7 +97,16 @@ const Header = ({ id }: { id: string }) => {
             pt="0.69rem"
             display="flex"
             flexDirection="column"
-            gap="7.44rem"
+            sx={{
+              px: {
+                xs: "1.88rem",
+                md: 0,
+              },
+              gap: {
+                xs: "1rem",
+                md: "7.44rem",
+              },
+            }}
           >
             <Box>
               <Typography {...defaultH4Style} color="#252B42">
@@ -120,9 +144,32 @@ const Header = ({ id }: { id: string }) => {
                   {data.stock > 0 ? "In" : "Out of"} Stock
                 </Typography>
               </Box>
+              <Typography
+                {...defaultParagraphStyle}
+                color="#858585"
+                maxWidth="16.94rem"
+                mt="2rem"
+                sx={{
+                  display: {
+                    md: "none",
+                  },
+                }}
+              >
+                {data.description}
+              </Typography>
             </Box>
             <Box borderTop="0.0625rem solid #bdbdbd">
-              <Box display="flex" gap="0.62rem" mt="1.81rem" mb="4.19rem">
+              <Box
+                display="flex"
+                gap="0.62rem"
+                mt="1.81rem"
+                sx={{
+                  mb: {
+                    xs: "3rem",
+                    md: "4.19rem",
+                  },
+                }}
+              >
                 {colors.map((color) => (
                   <Box
                     key={color}

@@ -11,7 +11,7 @@ import {
   IProductState,
   ModalType,
 } from "../../../types";
-import { defaultH3Style } from "@/utils/constants";
+import { defaultH3Style, defaultParagraphStyle } from "@/utils/constants";
 import ProductCart from "@/components/common/product-cart";
 import {
   addProductToCart,
@@ -49,6 +49,7 @@ const getNavLinkStyle = (isActive?: boolean) => {
 };
 
 const Navbar = () => {
+  const [openNav, setOpenNav] = useState(false);
   const [modalState, setModalState] = useReducer(
     (prev: IModalState, next: Partial<IModalState>): IModalState => ({
       ...prev,
@@ -69,7 +70,13 @@ const Navbar = () => {
   };
 
   const getModalList = () => {
-    if (modalState.type === "cart")
+    if (modalState.type === "cart") {
+      if (products["cart"].length === 0)
+        return (
+          <Typography {...defaultParagraphStyle} textAlign="center">
+            No item in cart
+          </Typography>
+        );
       return products["cart"].map((item) => {
         return (
           <ProductCart
@@ -97,6 +104,13 @@ const Navbar = () => {
           />
         );
       });
+    }
+    if (products["wishlist"].length === 0)
+      return (
+        <Typography {...defaultParagraphStyle} textAlign="center">
+          No item in wishlist
+        </Typography>
+      );
     return products["wishlist"].map((item) => {
       return (
         <ProductCart
@@ -119,10 +133,73 @@ const Navbar = () => {
       gap="7.44rem"
       maxWidth="90rem"
       margin="0 auto"
+      position="relative"
+      sx={{
+        justifyContent: {
+          xs: "space-between",
+          lg: "flex-start",
+        },
+      }}
     >
       <Logo />
-      <Box display="flex" width="100%" justifyContent="space-between">
-        <Box display="flex" gap="1.3rem">
+      <Box
+        component="button"
+        border="none"
+        bgcolor="transparent"
+        onClick={() => setOpenNav(!openNav)}
+        sx={{ display: { xs: "inline", lg: "none" } }}
+      >
+        <Box position="relative" width="1.5rem" height="0.86rem">
+          <Image src="/assets/svgs/hamburger.svg" alt="" fill />
+        </Box>
+      </Box>
+      <Box
+        display="flex"
+        width="100%"
+        justifyContent="space-between"
+        left={0}
+        top="5.5rem"
+        visibility={openNav ? "visible" : "hidden"}
+        sx={{
+          position: {
+            xs: "absolute",
+            lg: "static",
+          },
+          flexDirection: {
+            xs: "column",
+            lg: "row",
+          },
+          bgcolor: {
+            xs: "#ffffff",
+            lg: "transparent",
+          },
+          zIndex: {
+            xs: openNav ? 99 : -1,
+            lg: 0,
+          },
+          pb: {
+            xs: "2.44rem",
+            lg: 0,
+          },
+        }}
+      >
+        <Box
+          display="flex"
+          sx={{
+            flexDirection: {
+              xs: "column",
+              lg: "row",
+            },
+            gap: {
+              xs: "1.87rem",
+              lg: "1.3rem",
+            },
+            alignItems: {
+              xs: "center",
+              lg: "flex-start",
+            },
+          }}
+        >
           <Typography {...getNavLinkStyle()} component={Link} href="/">
             Home
           </Typography>
@@ -152,80 +229,96 @@ const Navbar = () => {
             Pages
           </Typography>
         </Box>
-        <Box>
-          <Box display="flex" alignItems="center" gap="1.87rem">
+        <Box
+          display="flex"
+          alignItems="center"
+          gap="1.87rem"
+          sx={{
+            flexDirection: {
+              xs: "column",
+              lg: "row",
+            },
+            alignItems: {
+              xs: "center",
+              lg: "flex-start",
+            },
+            mt: {
+              xs: "2.25rem",
+              lg: 0,
+            },
+          }}
+        >
+          <Typography
+            component={Link}
+            href="/auth"
+            {...getNavLinkStyle()}
+            color="#23A6F0"
+          >
             <Typography
-              component={Link}
-              href="/auth"
-              {...getNavLinkStyle()}
-              color="#23A6F0"
+              component="span"
+              display="inline-block"
+              position="relative"
+              width="0.75rem"
+              height="0.75rem"
+              marginRight="0.31rem"
             >
-              <Typography
-                component="span"
-                display="inline-block"
-                position="relative"
-                width="0.75rem"
-                height="0.75rem"
-                marginRight="0.31rem"
-              >
-                <Image alt="" src="/assets/svgs/user.svg" fill />
-              </Typography>
-              Login / Register
+              <Image alt="" src="/assets/svgs/user.svg" fill />
             </Typography>
-            <Box
-              component={Link}
-              href="/search"
+            Login / Register
+          </Typography>
+          <Box
+            component={Link}
+            href="/search"
+            display="inline-block"
+            position="relative"
+            width="1rem"
+            height="1rem"
+          >
+            <Image alt="" src="/assets/svgs/search.svg" fill />
+          </Box>
+          <Box
+            {...getNavLinkStyle()}
+            color="#23A6F0"
+            fontWeight={400}
+            display="flex"
+            alignItems="center"
+            id="cart"
+            sx={{ cursor: "pointer" }}
+            onClick={() => toggleModal(true, "cart")}
+          >
+            <Typography
+              component="span"
               display="inline-block"
               position="relative"
               width="1rem"
               height="1rem"
+              marginRight="0.31rem"
             >
-              <Image alt="" src="/assets/svgs/search.svg" fill />
-            </Box>
-            <Box
-              {...getNavLinkStyle()}
-              color="#23A6F0"
-              fontWeight={400}
-              display="flex"
-              alignItems="center"
-              id="cart"
-              sx={{ cursor: "pointer" }}
-              onClick={() => toggleModal(true, "cart")}
+              <Image alt="" src="/assets/svgs/cart.svg" fill />
+            </Typography>
+            {products.cart.length > 0 && products.cart.length}
+          </Box>
+          <Box
+            {...getNavLinkStyle()}
+            color="#23A6F0"
+            fontWeight={400}
+            display="flex"
+            id="wishlist"
+            alignItems="center"
+            sx={{ cursor: "pointer" }}
+            onClick={() => toggleModal(true, "wishlist")}
+          >
+            <Typography
+              component="span"
+              display="inline-block"
+              position="relative"
+              width="1rem"
+              height="1rem"
+              marginRight="0.31rem"
             >
-              <Typography
-                component="span"
-                display="inline-block"
-                position="relative"
-                width="1rem"
-                height="1rem"
-                marginRight="0.31rem"
-              >
-                <Image alt="" src="/assets/svgs/cart.svg" fill />
-              </Typography>
-              {products.cart.length > 0 && products.cart.length}
-            </Box>
-            <Box
-              {...getNavLinkStyle()}
-              color="#23A6F0"
-              fontWeight={400}
-              display="flex"
-              id="wishlist"
-              alignItems="center"
-              sx={{ cursor: "pointer" }}
-              onClick={() => toggleModal(true, "wishlist")}
-            >
-              <Typography
-                component="span"
-                display="inline-block"
-                position="relative"
-                width="1rem"
-                height="1rem"
-                marginRight="0.31rem"
-              >
-                <Image alt="" src="/assets/svgs/love.svg" fill />
-              </Typography>
-              {products.wishlist.length > 0 && products.wishlist.length}
-            </Box>
+              <Image alt="" src="/assets/svgs/love.svg" fill />
+            </Typography>
+            {products.wishlist.length > 0 && products.wishlist.length}
           </Box>
         </Box>
       </Box>

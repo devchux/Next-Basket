@@ -28,6 +28,7 @@ const Partners = () => {
             alignItems="center"
             height="100%"
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={`/assets/svgs/${text}.svg`} alt="" />
           </Box>
         ))}

@@ -30,16 +30,40 @@ const Footer = () => {
           maxWidth="65.625rem"
           margin="auto"
           display="flex"
-          alignItems="center"
-          justifyContent="space-between"
           height="100%"
+          sx={{
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+            alignItems: {
+              xs: "flex-start",
+              md: "center",
+            },
+            justifyContent: {
+              xs: "flex-start",
+              md: "space-between",
+            },
+            gap: {
+              xs: "1.66rem",
+              md: 0,
+            },
+            px: {
+              xs: "2.8rem",
+              md: 0,
+            },
+          }}
         >
           <Logo />
           <Box
-            width="14.75rem"
             display="flex"
             justifyContent="center"
             gap="1.25rem"
+            sx={{
+              width: {
+                md: "14.75rem",
+              },
+            }}
           >
             <Box position="relative" width="1.5rem" height="1.24rem">
               <Image alt="" src="/assets/svgs/fb-blue.svg" fill />
@@ -56,15 +80,33 @@ const Footer = () => {
       <Box
         maxWidth="65.625rem"
         margin="auto"
-        padding="3.12rem 0"
+        padding="3.12rem"
         borderTop="0.0625rem solid #e6e6e6"
+        sx={{
+          px: {
+            xs: "2.8rem",
+            md: 0,
+          },
+        }}
       >
-        <Box display="flex">
+        <Box
+          display="flex"
+          sx={{
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+            gap: {
+              xs: "1.8rem",
+              md: 0,
+            },
+          }}
+        >
           {footerLinks.map((item, index) => (
             <Box
               key={item.title}
               marginRight={{
-                lg: footerLinkRightSpacing(index),
+                md: footerLinkRightSpacing(index),
               }}
             >
               <Typography
@@ -121,17 +163,37 @@ const Footer = () => {
           </Box>
         </Box>
       </Box>
-      <Box padding="1.56rem 0" bgcolor="#FAFAFA">
+      <Box padding="1.56rem" bgcolor="#FAFAFA">
         <Box
-          maxWidth="65.625rem"
           margin="auto"
+          sx={{
+            maxWidth: {
+              xs: "12rem",
+              md: "65.625rem",
+            },
+          }}
         >
           <Typography
             {...defaultParagraphStyle}
             fontWeight="700"
             color="#737373"
+            sx={{
+              textAlign: {
+                xs: "center",
+                md: "left",
+              },
+            }}
           >
-            Made With Love By Finland All Right Reserved
+            Made With Love By Finland{" "}
+            <Typography
+              component="span"
+              {...defaultParagraphStyle}
+              fontWeight="700"
+              color="#737373"
+              sx={{ display: { xs: "none", md: "inline" } }}
+            >
+              All Right Reserved
+            </Typography>
           </Typography>
         </Box>
       </Box>

@@ -11,6 +11,7 @@ const EmailNotification = () => {
       bgcolor="#f9f9f9"
       borderRadius="0.3125rem"
       overflow="hidden"
+      width="fit-content"
     >
       <Box
         component="input"
