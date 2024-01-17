@@ -159,7 +159,6 @@ const Navbar = () => {
         justifyContent="space-between"
         left={0}
         top="5.5rem"
-        visibility={openNav ? "visible" : "hidden"}
         sx={{
           position: {
             xs: "absolute",
@@ -180,6 +179,10 @@ const Navbar = () => {
           pb: {
             xs: "2.44rem",
             lg: 0,
+          },
+          visibility: {
+            xs: openNav ? "visible" : "hidden",
+            lg: "visible",
           },
         }}
       >

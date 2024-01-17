@@ -10,11 +10,20 @@ const Testimonials = () => {
 
   return (
     <SectionLayout
-      padding="8rem 3rem"
       maxWidth="70.5rem"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
+      sx={{
+        flexDirection: {
+          xs: "column",
+          lg: "row",
+        },
+        padding: {
+          xs: "0 0 2.55rem 0",
+          lg: "8rem 3rem",
+        },
+      }}
     >
       <Box width="100%" maxWidth="30rem" textAlign="center">
         <Typography {...defaultH3Style} color="#252B42" mb="1.75rem">
@@ -35,7 +44,7 @@ const Testimonials = () => {
             overflow="hidden"
           >
             <Image
-              src={`/assets/images/user-1.jpg`}
+              src={`/assets/images/user-1.webp`}
               alt=""
               fill
               style={{ objectFit: "cover" }}
@@ -71,17 +80,32 @@ const Testimonials = () => {
         maxWidth="31.22rem"
         display="grid"
         gridTemplateColumns="repeat(3, 1fr)"
-        gap="1.12rem"
+        sx={{
+          gap: {
+            xs: "0rem 0.87rem",
+            lg: "1.12rem",
+          },
+        }}
       >
         {Array(9)
           .fill(null)
           .map((_, index) => (
-            <Box key={index} position="relative" height="8.92rem">
-              <Image
-                src={`/assets/images/t-${index + 1}.png`}
+            <Box
+              key={index}
+              position="relative"
+              sx={{
+                height: {
+                  xs: "7rem",
+                  lg: "8.92rem",
+                },
+              }}
+            >
+              <Box
+                component={Image}
+                src={`/assets/images/t-${index + 1}.webp`}
                 alt=""
                 fill
-                style={{ objectFit: "contain" }}
+                objectFit="contain"
               />
             </Box>
           ))}

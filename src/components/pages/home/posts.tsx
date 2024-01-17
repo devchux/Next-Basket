@@ -17,10 +17,16 @@ const Posts = () => {
           fontWeight: 700,
         }}
       />
-      <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap="0.62rem">
-        <Post image="/assets/images/post-1.png" />
-        <Post image="/assets/images/post-2.png" />
-        <Post image="/assets/images/post-3.png" />
+      <Box display="grid" gap="0.62rem" sx={{
+        gridTemplateColumns: {
+          xs: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)"
+        }
+      }}>
+        <Post image="/assets/images/post-1.webp" />
+        <Post image="/assets/images/post-2.webp" />
+        <Post image="/assets/images/post-3.webp" />
       </Box>
     </SectionLayout>
   );

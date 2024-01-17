@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { defaultParagraphStyle } from "@/utils/constants";
+import { defaultH3Style, defaultParagraphStyle } from "@/utils/constants";
 
 const paragraphStyle = {
   ...defaultParagraphStyle,
@@ -18,13 +18,18 @@ const HomeHeaderBanner: FC<{
   itemsCount: number;
   title?: string;
   imageSrc: string;
-}> = ({ itemsCount, title = "FURNITURE", imageSrc }) => {
+  isLarge?: boolean;
+  smImageSrc?: string;
+}> = ({ itemsCount, title = "FURNITURE", imageSrc, isLarge, smImageSrc }) => {
   return (
     <Box
       padding="1.5rem"
       height="100%"
       sx={{
-        backgroundImage: `url(${imageSrc})`,
+        backgroundImage: {
+          xs: `url(${smImageSrc || imageSrc})`,
+          md: `url(${imageSrc})`,
+        },
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
@@ -33,11 +38,25 @@ const HomeHeaderBanner: FC<{
         {itemsCount} Items
       </Typography>
       <Typography
-        {...headingStyle}
         variant="h4"
         color="#252B42"
         textTransform="uppercase"
         marginBottom="0.31rem"
+        fontWeight={700}
+        sx={{
+          fontSize: {
+            xs: "1.5rem",
+            lg: isLarge ? headingStyle.fontSize : "1.5rem",
+          },
+          lineHeight: {
+            xs: "2rem",
+            lg: isLarge ? headingStyle.lineHeight : "2rem",
+          },
+          letterSpacing: {
+            xs: "0.00625rem",
+            lg: isLarge ? headingStyle.letterSpacing : "0.00625rem",
+          },
+        }}
       >
         {title}
       </Typography>

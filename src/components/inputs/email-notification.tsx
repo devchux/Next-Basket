@@ -11,7 +11,12 @@ const EmailNotification = () => {
       bgcolor="#f9f9f9"
       borderRadius="0.3125rem"
       overflow="hidden"
-      width="fit-content"
+      sx={{
+        maxWidth: {
+          xs: "20.0625rem",
+          lg: "fit-content",
+        },
+      }}
     >
       <Box
         component="input"
@@ -26,15 +31,16 @@ const EmailNotification = () => {
         height="100%"
         padding="0.94rem"
         bgcolor="transparent"
+        width="63%"
       />
       <Button
         variant="contained"
-        fullWidth
         sx={{
+          width: "37%",
           height: "100%",
           maxWidth: "7.3125rem",
           textTransform: "capitalize",
-          borderRadius: "0"
+          borderRadius: "0",
         }}
       >
         Subscribe

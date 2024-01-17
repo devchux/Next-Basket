@@ -10,13 +10,16 @@ const Partners = () => {
       <Box
         py="3.12rem"
         display="flex"
-        gap="1.88rem"
         sx={{
           flexDirection: {
             xs: "column",
             md: "row",
           },
           alignItems: "center",
+          gap: {
+            xs: "3.75rem",
+            md: "1.88rem",
+          },
         }}
       >
         {data.map((text) => (

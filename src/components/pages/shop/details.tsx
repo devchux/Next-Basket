@@ -67,7 +67,7 @@ const ProductDetails = () => {
             </Typography>
           </Box>
           <Box position="relative" height="23.25rem" width="100%" maxWidth="25.8125rem">
-            <Image src="/assets/images/detail.png" alt="" fill />
+            <Image src="/assets/images/detail.webp" alt="" fill />
           </Box>
         </Box>
       </SectionLayout>
