@@ -148,6 +148,7 @@ const Navbar = () => {
         bgcolor="transparent"
         onClick={() => setOpenNav(!openNav)}
         sx={{ display: { xs: "inline", lg: "none" } }}
+        aria-label="hamburger"
       >
         <Box position="relative" width="1.5rem" height="0.86rem">
           <Image src="/assets/svgs/hamburger.svg" alt="" fill />

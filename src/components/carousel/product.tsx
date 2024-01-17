@@ -34,6 +34,7 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
             sx={{
               cursor: "pointer",
             }}
+            aria-label="greater-than"
           >
             <Box height="2.8rem" width="1.5rem" position="relative">
               <Image
@@ -69,6 +70,7 @@ const ProductCarousel: FC<{ images: string[] }> = ({ images }) => {
             bottom="9.16rem"
             zIndex={1}
             onClick={onPrev}
+            aria-label="lesser-than"
             sx={{
               cursor: "pointer",
             }}

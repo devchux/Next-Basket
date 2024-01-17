@@ -203,6 +203,7 @@ const Header = ({ id }: { id: string }) => {
                   border="1px solid #E8E8E8"
                   sx={{ cursor: "pointer" }}
                   onClick={addwishlist}
+                  aria-label="wishlist"
                 >
                   <Box position="relative" width="1.25rem" height="1.25rem">
                     <Image src="/assets/svgs/love-black.svg" alt="" fill />
@@ -219,6 +220,7 @@ const Header = ({ id }: { id: string }) => {
                   border="1px solid #E8E8E8"
                   sx={{ cursor: "pointer" }}
                   onClick={addCart}
+                  aria-label="cart"
                 >
                   <Box position="relative" width="1.25rem" height="1.25rem">
                     <Image src="/assets/svgs/cart-black.svg" alt="" fill />
@@ -234,6 +236,7 @@ const Header = ({ id }: { id: string }) => {
                   borderRadius="50%"
                   border="1px solid #E8E8E8"
                   sx={{ cursor: "pointer" }}
+                  aria-label="eye"
                 >
                   <Box position="relative" width="1.25rem" height="1.25rem">
                     <Image src="/assets/svgs/eye.svg" alt="" fill />
