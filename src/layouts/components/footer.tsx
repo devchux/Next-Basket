@@ -41,7 +41,7 @@ const Footer = () => {
               md: "center",
             },
             justifyContent: {
-              xs: "flex-start",
+              xs: "center",
               md: "space-between",
             },
             gap: {
@@ -50,7 +50,7 @@ const Footer = () => {
             },
             px: {
               xs: "2.8rem",
-              md: 0,
+              lg: 0,
             },
           }}
         >
@@ -85,7 +85,7 @@ const Footer = () => {
         sx={{
           px: {
             xs: "2.8rem",
-            md: 0,
+            lg: 0,
           },
         }}
       >
