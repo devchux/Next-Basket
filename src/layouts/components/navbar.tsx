@@ -219,16 +219,16 @@ const Navbar = () => {
               <Image alt="" src="/assets/svgs/caret.svg" fill />
             </Typography>
           </Typography>
-          <Typography {...getNavLinkStyle()} component={Link} href="/">
+          <Typography {...getNavLinkStyle()} component={Link} href="/about">
             About
           </Typography>
-          <Typography {...getNavLinkStyle()} component={Link} href="/">
+          <Typography {...getNavLinkStyle()} component={Link} href="/blog">
             Blog
           </Typography>
-          <Typography {...getNavLinkStyle()} component={Link} href="/">
+          <Typography {...getNavLinkStyle()} component={Link} href="/contact">
             Contact
           </Typography>
-          <Typography {...getNavLinkStyle()} component={Link} href="/">
+          <Typography {...getNavLinkStyle()} component={Link} href="/pages">
             Pages
           </Typography>
         </Box>
